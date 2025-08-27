@@ -70,7 +70,7 @@ export default function SignupForm() {
     if (details?._id) {
       auth.login(details._id);
     }
-    console.log("Stored userId in localStorage:" ,details._id);
+
   }, [details]);
   
   if(error){

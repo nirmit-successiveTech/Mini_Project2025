@@ -11,7 +11,6 @@ export default function FoodForm() {
   });
 
   useEffect(() => {
-    console.log("localstoreage userId is:", localStorage.getItem("userId"));
     const userId = localStorage.getItem("userId");
     if (userId) {
       setForm((prevForm) => ({ ...prevForm, userId }));
