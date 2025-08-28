@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const userContext = createContext();
-export const userAuth =()=>(useContext(userContext))
+export const userAuth =()=>useContext(userContext)
 
 export default function UserProvider({ children }) {
 
@@ -25,7 +25,8 @@ export default function UserProvider({ children }) {
     }
 
     const logout=()=>{
-        localStorage.removeItem("loggedUserId")
+        localStorage.removeItem("loggedUserId");
+        setMyuserId(null);
     }
 
   return (

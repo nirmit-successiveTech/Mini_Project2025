@@ -26,6 +26,8 @@ export default function ExploreDish() {
       </div>
     );
 
+  const handleClick = () => {};
+
   return (
     <div className="m-6 lg:m-16">
       <div className="mb-8">
@@ -74,11 +76,17 @@ export default function ExploreDish() {
           </div>
           <div className="flex items-center gap-10">
             <div>
-              <button className="px-8 py-2 bg-purple-700 text-white rounded-2xl font-bold">
-                Buy
-              </button>
+              <form action="/api/checkout_sessions" method="POST">
+                <section>
+                  <button type="submit" role="link" className="bg-purple-700 px-4 py-2 rounded-full text-white font-semibold animate-">
+                    Checkout
+                  </button>
+                </section>
+              </form>
             </div>
-            <div className="bg-red-600 px-8 py-2 rounded-2xl font-bold text-white tracking-tight">${currentPrice}</div>
+            <div className="bg-red-600 px-8 py-2 rounded-2xl font-bold text-white tracking-tight">
+              ${currentPrice}
+            </div>
           </div>
         </div>
       </div>

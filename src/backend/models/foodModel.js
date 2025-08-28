@@ -21,6 +21,11 @@ const foodSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    status:{
+      type:String,
+      enum:["Available","Claimed"],
+      default:"Available"
+    }
   },
   { timestamps: true } 
 );

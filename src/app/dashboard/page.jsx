@@ -2,8 +2,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { User, Settings, LogOut, Home } from "lucide-react"; // icons
+import { userAuth } from "../context/User/userContext";
+import Loader from "@/components/visuals/Loader";
 
 export default function Dashboard() {
+
+  const { myuserId ,logout} = userAuth();
+  const loggedId = myuserId;
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -23,14 +29,17 @@ export default function Dashboard() {
     };
 
     fetchUser();
-  }, []);
+  }, [loggedId]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+
+  if (loading) return <div className="text-center mt-10"><Loader /></div>;
+  if(!loggedId){
+    return <div className="text-center mt-10 text-red-600 font-semibold h-screen">Unauthorized, please login</div>;
+  }
   if (error)
-    return <p className="text-center mt-10 text-red-600 font-semibold">{error}</p>;
+    return <div className="text-center mt-10 text-red-600 font-semibold h-screen">{error}</div>;
 
-  // localStorage.setItem("userId", user._id);
-  console.log("Stored userId in localStorage:", user._id);
+
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -57,10 +66,10 @@ export default function Dashboard() {
             <Settings size={18} /> Settings
           </a>
           <button
-            onClick={() => alert("Future: Logout")}
+            onClick={logout}
             className="flex items-center gap-2 p-2 rounded hover:bg-red-600 transition mt-auto"
           >
-            <LogOut size={18} /> Logout
+            <LogOut size={18}/> Logout
           </button>
         </nav>
       </aside>
@@ -69,7 +78,7 @@ export default function Dashboard() {
       <main className="flex-1 p-8">
         <header className="flex justify-between items-center bg-white shadow p-4 rounded-lg mb-6">
           <h1 className="text-2xl font-bold text-purple-700">
-            Welcome, {user?.name} 👋
+            Welcome, {user?.name} 
           </h1>
           <span className="text-gray-500">ID: {user?._id}</span>
         </header>

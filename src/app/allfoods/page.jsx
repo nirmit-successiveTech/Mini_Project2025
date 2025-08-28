@@ -31,10 +31,12 @@ export default function FetchFood() {
   }, []);
 
   if (loading) return <div className="text-center"><Loader /></div>;
-  if (error) return <div className="text-center text-red-500 h-screen">{error}</div>;
+
+  if (error)
+    return <div className="text-center text-red-500 h-screen">{error}</div>;
 
   return (
-    <div className="m-6 h-screen">
+    <div className="m-6">
       <MyComponent />
       <div
         className="flex justify-end m-6 gap-6"
@@ -46,7 +48,11 @@ export default function FetchFood() {
         {foods.map((food) => (
           <div
             key={food._id}
-            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+            className={
+              food.status === "claimed"
+                ? "bg-gray-300 hover:bg-gray-400"
+                : "max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 hover:bg-gray-100 dark:border-gray-700"
+            }
           >
             <a href="">
               <img
@@ -71,27 +77,34 @@ export default function FetchFood() {
                 </span>{" "}
                 ({food.userId?.email})
               </p>
-              <a
-                href={`/fooddetails/${food._id}`}
-                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-              >
-                Read more
-                <svg
-                  className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
-              </a>
+              <div className="flex items-center w-full  justify-between">
+                <div>
+                  <a
+                    href={`/fooddetails/${food._id}`}
+                    className="inline-flex items-center px-3 py-2 text-md font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+                  >
+                    View
+                    <svg
+                      className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                <div className="cursor-pointer text-md bg-purple-700 text-white px-4 py-2 font-normal rounded-lg">
+                  {food.status}
+                </div>
+              </div>
             </div>
           </div>
         ))}

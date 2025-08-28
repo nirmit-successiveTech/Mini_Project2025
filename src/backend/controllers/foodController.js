@@ -1,3 +1,4 @@
+import { pubsub } from "../graphql/pubsub.js";
 import { Food } from "../models/foodModel.js";
 
 export const createFood = async (req, res) => {
@@ -7,6 +8,8 @@ export const createFood = async (req, res) => {
 
     const newFood = new Food({ title, description, imageUrl, userId });
     await newFood.save();
+
+    await pubsub.publish(FOOD_TOPIC, { foodAdded: newFood });
 
     return res.status(201).json({
       success: true,
@@ -36,7 +39,7 @@ export const getAllFood=async(req,res,next)=>{
 export const getFoodById = async (req, res) => {
   try {
     const { id } = req.params;
-    const foodItem = await Food.findById(id).populate("userId", "name email");
+    const foodItem = await Food.findById(id).populate("userId", "name email status phone");
     if (!foodItem) {
       return res.status(404).json({ success: false, error: "Food item not found" });
     }

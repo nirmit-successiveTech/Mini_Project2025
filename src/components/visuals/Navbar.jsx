@@ -3,16 +3,18 @@
 import { userAuth } from "@/app/context/User/userContext";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const { login, logout, myuserId } = userAuth();
-  const [username, setUsername] = useState(null)
+  const router = useRouter();
+  const [username, setUsername] = useState(null);
+  
 
   useEffect(()=>{
     const fetchUsername = async () => {
       try {
-        console.log('..........')
         const response = await axios.get(`http://localhost:8000/api/users/me`,{
           withCredentials: true,
         });
@@ -23,7 +25,7 @@ export default function Navbar() {
       }
     };
       fetchUsername();
-  }, [myuserId]);
+  },);
 
   console.log("my user id in navbar is", myuserId);
   console.log('username in navbar is', username);
@@ -51,7 +53,7 @@ export default function Navbar() {
         </div>
         {myuserId ? (
           <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <span className="font-medium text-gray-600 dark:text-gray-300"> {username? username.slice(0, 1).toUpperCase() : "U"}</span>
+            <span className="font-medium text-gray-600 dark:text-gray-300" onClick={()=>router.push("/dashboard")}> {username? username.slice(0, 1).toUpperCase() : "U"}</span>
           </div>
         ) : (
           <div className="flex gap-4">

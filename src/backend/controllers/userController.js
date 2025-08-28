@@ -94,3 +94,48 @@ export const logout = async(req,res,next)=>{
     next(error);
   }
 }
+
+export const login = async (req, res) => {
+  try {
+    console.log('calling login');
+    const { name, email, password } = req.body;
+
+  
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+
+    if (user.name !== name) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign({ id: user._id }, "secret_key123", {
+      expiresIn: "1d",
+    });
+
+    console.log(token);
+        res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, 
+    });
+
+   
+
+    res.status(200).json({
+      message: "Login successful",
+      user,
+    });
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
