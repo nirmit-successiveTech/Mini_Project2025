@@ -1,4 +1,5 @@
-import { FOOD_TOPIC, pubsub } from "../../../graphql/pubsub.js";
+
+import { pubsub } from "../graphql/pubsub.js";
 import { Food } from "../models/foodModel.js";
 
 export const createFood = async (req, res) => {
@@ -9,7 +10,7 @@ export const createFood = async (req, res) => {
     const newFood = new Food({ title, description, imageUrl, userId });
     await newFood.save();
 
-    await pubsub.publish(FOOD_TOPIC, { foodAdded: newFood });
+    await pubsub.publish("FOOD_TOPIC", { foodAdded: newFood });
 
     return res.status(201).json({
       success: true,

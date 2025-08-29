@@ -1,0 +1,16 @@
+export const typeDefs = `
+  type Food {
+    title:String!,
+    description:String!, 
+    imageUrl:String!,
+    userId:ID!
+  }
+
+  type Query {
+    foods: [Food!]!
+  }
+
+  type Subscription {
+    foodAdded: Food!
+  }
+`;
