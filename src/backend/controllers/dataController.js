@@ -31,7 +31,7 @@ export const sendMail = async (req, res, next) => {
       port: 587,
       secure: false,
       auth: {
-        user: SEND_GRID_USER,              
+        user: process.env.SEND_GRID_USER,              
         pass: process.env.SEND_GRIDS, 
       },
     });

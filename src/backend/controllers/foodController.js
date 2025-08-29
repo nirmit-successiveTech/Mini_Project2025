@@ -1,4 +1,4 @@
-import { pubsub } from "../graphql/pubsub.js";
+import { FOOD_TOPIC, pubsub } from "../../../graphql/pubsub.js";
 import { Food } from "../models/foodModel.js";
 
 export const createFood = async (req, res) => {
