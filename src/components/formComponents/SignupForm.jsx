@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { userAuth } from "@/app/context/User/userContext";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
   const [error, setError] = useState("");
   const auth = userAuth();
-
+  const router = useRouter();
   const [details, setDetails] = useState("");
 
   const [form, setForm] = useState({
@@ -44,7 +46,19 @@ export default function SignupForm() {
         address: "",
         pincode: "",
       });
+
+      toast("User Signed Up Successfully", {
+        style: {
+          backgroundColor: "#28a745",
+          color: "white",
+        },
+      });
       await fetchUser();
+
+      setTimeout(() => {
+        router.push("/allfoods");
+      }, 2000);
+
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred");
     }
@@ -77,6 +91,7 @@ export default function SignupForm() {
       className="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-10 h-screen"
       onSubmit={handleSubmit}
     >
+      <ToastContainer />
       <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
       <div className="mb-4">
         <label className="block mb-1 font-medium">Name</label>

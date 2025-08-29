@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AddFoodButton from "@/components/visuals/addFoodButton";
+import AddFoodButton from "@/components/visuals/AddFoodButton";
 import { useRouter } from "next/navigation";
 import MyComponent from "@/components/visuals/TypeWriter";
 import Loader from "@/components/visuals/Loader";
+import Faq from "@/components/visuals/Faq";
 
 export default function FetchFood() {
   const [foods, setFoods] = useState([]);
@@ -109,6 +110,7 @@ export default function FetchFood() {
           </div>
         ))}
       </div>
+      <div><Faq /></div>
     </div>
   );
 }

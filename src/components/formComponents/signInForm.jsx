@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { userAuth } from "@/app/context/User/userContext";
 import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function SigninForm() {
   const [form, setForm] = useState({
@@ -33,7 +34,16 @@ export default function SigninForm() {
         { withCredentials: true }
       );
       setForm({ name: "", email: "", password: "" });
+      toast("User Logged In Successfully", {
+        style: {
+          backgroundColor: "#28a745",
+          color: "white",
+        },
+      });
       await fetchUser();
+      setTimeout(() => {
+        router.push("/allfoods");
+      }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -54,12 +64,11 @@ export default function SigninForm() {
     if (details?._id) {
       auth.login(details._id);
     }
-    if(details){
-    setTimeout(()=>{
+    if (details) {
+      setTimeout(() => {
         router.push("/");
-    },1000)
+      }, 1000);
     }
-
   }, [details]);
 
   if (error) {
@@ -72,6 +81,7 @@ export default function SigninForm() {
       className="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-10 h-screen"
       onSubmit={handleSubmit}
     >
+      <ToastContainer />
       <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
 
       <div className="mb-4">

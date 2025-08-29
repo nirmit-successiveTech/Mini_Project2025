@@ -69,7 +69,8 @@ const wsServer = new WebSocketServer({
   server: httpServer,
   path: "/graphql",
 });
-useServer({ schema, context: () => ({ pubsub }) }, wsServer);
+// eslint-disable-next-line react-hooks/rules-of-hooks
+useServer({ schema, context: () => ({ pubsub }) }, wsServer); // wrote above to prevent error
 
 // 🔹 Start the server
 const PORT = 8000;

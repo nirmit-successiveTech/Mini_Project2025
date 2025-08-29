@@ -27,8 +27,8 @@ export default function Category (){
       <div className="p-6">
         <div className="border-l-5 border-purple-700 pl-4 font-bold text-3xl">{params.id}</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-                  {food.map((item) => (
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                  {food.map((item,index) => (
+        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700" key={index}>
           <a >
             <img
               className="p-8 rounded-t-lg"

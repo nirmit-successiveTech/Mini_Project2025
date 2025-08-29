@@ -1,5 +1,3 @@
-
-
 import nodemailer from 'nodemailer';
 import { User } from '../models/userModel.js';
 import { Food } from '../models/foodModel.js';

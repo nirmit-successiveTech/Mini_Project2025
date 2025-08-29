@@ -1,5 +1,6 @@
 "use client";
 
+import { InfiniteMovingCardsDemo } from "@/components/visuals/CardCarousel";
 import Loader from "@/components/visuals/Loader";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -30,8 +31,8 @@ export default function BuyFood() {
     <div>
       <div className="border-l-8 border-purple-700 pr-4 p-3 m-6 text-4xl font-bold"> Category</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-        {food.map((item) => (
-          <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        {food.map((item,index) => (
+          <div key={index} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
               <img
                 className="p-8 rounded-t-lg"
@@ -108,6 +109,9 @@ export default function BuyFood() {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <InfiniteMovingCardsDemo />
       </div>
     </div>
   );

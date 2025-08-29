@@ -44,7 +44,7 @@ export default function Navbar() {
 
           <div className="flex gap-6">
             <Link href="/allfoods" className="hover:text-gray-200 transition">
-              Server Community
+              Serve Community
             </Link>
             <Link href="/buy-food" className="hover:text-gray-200 transition">
               Buy Food
@@ -53,7 +53,7 @@ export default function Navbar() {
         </div>
         {myuserId ? (
           <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <span className="font-medium text-gray-600 dark:text-gray-300" onClick={()=>router.push("/dashboard")}> {username? username.slice(0, 1).toUpperCase() : "U"}</span>
+            <span className="font-medium  cursor-pointer text-gray-600 dark:text-gray-300" onClick={()=>router.push("/dashboard")}> {username? username.slice(0, 1).toUpperCase() : "U"}</span>
           </div>
         ) : (
           <div className="flex gap-4">
