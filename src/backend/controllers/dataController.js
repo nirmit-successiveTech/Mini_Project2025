@@ -19,7 +19,7 @@ export const sendMail = async (req, res, next) => {
     console.log(claimedFood);
 
     if (!userExists) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found ,kindly register" });
     }
     console.log('user exists:', userExists);
 
@@ -31,8 +31,8 @@ export const sendMail = async (req, res, next) => {
       port: 587,
       secure: false,
       auth: {
-        user: process.env.SEND_GRID_USER,              
-        pass: process.env.SEND_GRIDS, 
+        user: process.env.SEND_GRID_USER,           
+        pass: process.env.SEND_GRIDS
       },
     });
 
