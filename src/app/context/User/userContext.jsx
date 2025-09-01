@@ -11,7 +11,6 @@ export default function UserProvider({ children }) {
     useEffect(()=>{
         const loggedInUserId = localStorage.getItem("loggedUserId");
         if(loggedInUserId){
-            console.log("User is logged in with ID:", loggedInUserId);
             setMyuserId(loggedInUserId);
         } else {
             console.log("No user is logged in.");
@@ -21,7 +20,6 @@ export default function UserProvider({ children }) {
     const login=(userid)=>{
         localStorage.setItem("loggedUserId",userid)
         setMyuserId(userid)
-        console.log("User logged in with ID:", userid);
     }
 
     const logout=()=>{

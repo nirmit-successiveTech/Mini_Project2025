@@ -54,6 +54,9 @@ export default function Navbar() {
     <nav className="bg-purple-700 text-white px-6 py-4 shadow-md z-50 relative">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-8">
+          <div>
+            <img src="https://static.thenounproject.com/png/1221067-200.png"  className="w-12  cursor-pointer h-12" alt="" onClick={()=>router.push("/")} />
+          </div>
           <Link
             href="/"
             className="text-2xl font-bold tracking-wide hover:text-gray-200"
@@ -61,8 +64,8 @@ export default function Navbar() {
             HungerHub
           </Link>
           <div className="flex gap-6">
-            <Link href="/allfoods">Serve Community</Link>
-            <Link href="/buy-food">Buy Food</Link>
+            <Link href="/allfoods" className="hover:text-gray-200">Serve Community</Link>
+            <Link href="/buy-food" className="hover:text-gray-200">Buy Food</Link>
           </div>
         </div>
 
@@ -111,7 +114,7 @@ export default function Navbar() {
                   key={food.id}
                   className="p-2 border rounded-lg shadow-sm bg-gray-50"
                 >
-                  <p className="font-semibold">🍴 {food.title}</p>
+                  <p className="font-semibold"> {food.title}</p>
                   <p className="text-sm">{food.description}</p>
                 </div>
               ))

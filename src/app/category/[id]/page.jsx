@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 export default function Category() {
   const params = useParams();
-  console.log("details", params.id);
   const [loading, setLoading] = useState(true);
   const [food, setFood] = useState([]);
 
@@ -27,7 +26,6 @@ export default function Category() {
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * pageLimit;
   const totalPage = Math.ceil(food.length / pageLimit);
-  console.log("page size", totalPage);
   const foodArray = food.slice(startIndex, startIndex + pageLimit);
 
   if (loading)
@@ -129,7 +127,7 @@ export default function Category() {
       <div className="flex justify-center items-center gap-4 mt-3">
         {[...Array(totalPage)].map((_, index) => {
           return (
-            <button
+            <button key={index}
               onClick={() => setCurrentPage(index + 1)}
               className="bg-purple-700 px-4 py-2 rounded-md text-white"
             >

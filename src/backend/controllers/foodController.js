@@ -4,7 +4,6 @@ import { Food } from "../models/foodModel.js";
 
 export const createFood = async (req, res) => {
   try {
-    console.log('callin foodcontroller')
     const { title, description, imageUrl, userId } = req.body;
 
     const newFood = new Food({ title, description, imageUrl, userId });
@@ -18,7 +17,6 @@ export const createFood = async (req, res) => {
       data: newFood,
     });
   } catch (error) {
-    console.error("Error creating food:", error);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -32,7 +30,6 @@ export const getAllFood=async(req,res,next)=>{
             data:food
         })
     } catch (error) {
-    console.error("Error fetch food:", error);
     return res.status(500).json({ success: false, error: error.message });        
     }
 }
@@ -50,7 +47,6 @@ export const getFoodById = async (req, res) => {
       data: foodItem,
     });
   } catch (error) {
-    console.error("Error fetching food by ID:", error);
     return res.status(500).json({ success: false, error: error.message });
   }
 }

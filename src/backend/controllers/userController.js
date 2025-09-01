@@ -7,7 +7,6 @@ import { User } from "../models/userModel.js";
 
 export const registerUser = async (req, res) => {
   try {
-     console.log("register user");
     const { name, email, password, phone, address, pincode } = req.body;
 
       if (!name || !email || !password || !phone || !address || !pincode) {
@@ -79,9 +78,7 @@ export const getUserProfile = async (req, res) => {
 
 export const logout = async(req,res,next)=>{
   try {
-    console.log('calling logout');
     const token = req.cookies.token;
-    console.log("usertoken",token);
     if(!token){
       return res.status(401).json({error:"User Logout failed"});
     }
@@ -97,7 +94,6 @@ export const logout = async(req,res,next)=>{
 
 export const login = async (req, res) => {
   try {
-    console.log('calling login');
     const { name, email, password } = req.body;
 
   
@@ -120,9 +116,7 @@ export const login = async (req, res) => {
     const token = jwt.sign({ id: user._id }, "secret_key123", {
       expiresIn: "1d",
     });
-
-    console.log(token);
-        res.cookie("token", token, {
+      res.cookie("token", token, {
       httpOnly: true,
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, 
@@ -135,7 +129,6 @@ export const login = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log(err.message)
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };

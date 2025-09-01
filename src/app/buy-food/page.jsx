@@ -120,9 +120,7 @@ export default function BuyFood() {
       </div>
       <div className="flex gap-2 items-center  justify-center">
         {[...Array(pageSize)].map((_,index)=>{
-          return <div>
-            <button onClick={()=>setCurrentPage(index+1)} className="bg-purple-700 px-4 py-2 rounded-md text-white">{index+1}</button>
-          </div>
+          return <button onClick={()=>setCurrentPage(index+1)} className="bg-purple-700 px-4 py-2 rounded-md text-white">{index+1}</button>
         })}
       </div>
       <div>

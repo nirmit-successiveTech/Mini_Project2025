@@ -13,23 +13,20 @@ import { useServer } from "graphql-ws/use/ws";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-// REST controllers
 
-
-// GraphQL
 import { typeDefs } from "./graphql/schema.js";
 import { resolvers } from "./graphql/resolver.js";
 import { pubsub } from "./graphql/pubsub.js";
-// mongodb://localhost:27017/successive-db
+
 import router from "./router/userRouter.js";
-// 🔹 Connect MongoDB
+
 await mongoose.connect("mongodb://localhost:27017/successive-db");
-console.log("✅ MongoDB connected");
+
 
 const app = express();
-const httpServer = http.createServer(app); // create HTTP server from Express
+const httpServer = http.createServer(app); 
 
-// 🔹 REST middleware
+
 app.use(cors(
   {
     origin:"http://localhost:3000",
@@ -41,7 +38,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/users", router);
-// 🔹 Build GraphQL schema
+
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // Apollo Server
@@ -72,7 +69,7 @@ const wsServer = new WebSocketServer({
 // eslint-disable-next-line react-hooks/rules-of-hooks
 useServer({ schema, context: () => ({ pubsub }) }, wsServer); // wrote above to prevent error
 
-// 🔹 Start the server
+//  Start the server
 const PORT = 8000;
 httpServer.listen(PORT, () => {
   console.log(`🚀 REST API: http://localhost:8000`);

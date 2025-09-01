@@ -26,17 +26,12 @@ export default function FoodDetails() {
       setFood(res.data.data);
     } catch (err) {
       setError("Failed to fetch food details");
-      console.error("Error fetching food details:", err);
     } finally {
       setLoading(false);
     }
   };
 
   const currentUser = myuserId;
-  console.log("current user:", currentUser);
-      console.log("food status is",food)
-
-
   const handleClaimFood = async () => {
     try {
       const res = await axios.post(
@@ -53,7 +48,6 @@ export default function FoodDetails() {
       alert(res.data.message || "Food claimed successfully!");
       router.push("/allfoods");
     } catch (err) {
-      console.error("Error claiming food:", err);
       alert("Failed to claim food. Try again later.");
     }
   };

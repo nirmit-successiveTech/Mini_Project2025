@@ -11,7 +11,6 @@ const userSchema = Joi.object({
 });
     
 export const checkUsercredential = (req, res, next) => {
-    console.log('user middleware');
   const { error } = userSchema.validate(req.body);
   if (error) {
     return res.status(400).json({ message: error.details[0].message });
