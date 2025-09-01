@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { userAuth } from "@/app/context/User/userContext";
 import Loader from "@/components/visuals/Loader";
@@ -15,6 +15,7 @@ export default function FoodDetails() {
   const[fetched,setFetched]=useState(false);
 
   const { myuserId } = userAuth();
+  const router = useRouter();
 
   const fetchFoodDescription = async () => {
     try {
@@ -50,6 +51,7 @@ export default function FoodDetails() {
       );
       setFetched(true)
       alert(res.data.message || "Food claimed successfully!");
+      router.push("/allfoods");
     } catch (err) {
       console.error("Error claiming food:", err);
       alert("Failed to claim food. Try again later.");

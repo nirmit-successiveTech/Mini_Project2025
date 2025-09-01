@@ -1,25 +1,37 @@
-import nodemailer from 'nodemailer';
-import { User } from '../models/userModel.js';
-import { Food } from '../models/foodModel.js';
+import nodemailer from "nodemailer";
+import { User } from "../models/userModel.js";
+import { Food } from "../models/foodModel.js";
 
 export const sendMail = async (req, res, next) => {
   try {
     console.log("calling send mail controller");
-    const { email, user ,status,foodId} = req.body;
-    console.log("body content is",email,user,status);
+    const { email, user, status, foodId } = req.body;
+    console.log("body content is", email, user, status);
 
     if (!email || !user) {
       return res.status(400).json({ error: "email and user are required" });
     }
 
     const userExists = await User.findById(user);
-    const claimedFood = await Food.findByIdAndUpdate(foodId,{status:status},{new:true});
+    const foodStatus = await Food.findById(foodId);
+    if (foodStatus.status == "claimed") {
+      console.log("foodStatus",foodStatus.status)
+      return res.status(400).json({
+        success: false,
+        message: "Food already claimed",
+      });
+    }
+    const claimedFood = await Food.findByIdAndUpdate(
+      foodId,
+      { status: status },
+      { new: true }
+    );
     console.log(claimedFood);
 
     if (!userExists) {
       return res.status(404).json({ error: "User not found ,kindly register" });
     }
-    console.log('user exists:', userExists);
+    console.log("user exists:", userExists);
 
     const subject = "Food Claim Request";
     const text = `User ${userExists.name} has claimed the food item.`;
@@ -29,21 +41,20 @@ export const sendMail = async (req, res, next) => {
       port: 587,
       secure: false,
       auth: {
-        user: process.env.SEND_GRID_USER,           
-        pass: process.env.SEND_GRIDS
+        user: process.env.SEND_GRID_USER,
+        pass: process.env.SEND_GRIDS,
       },
     });
 
- 
     const info = await transporter.sendMail({
-      from: '"HungerHub" <nirmit.kaundal@successive.tech>', 
+      from: '"HungerHub" <nirmit.kaundal@successive.tech>',
       to: email,
       subject: subject,
       text: text,
       html: `<p>${text}</p>`,
     });
 
-    console.log("Message sent: %s", info.messageId,info.response);
+    console.log("Message sent: %s", info.messageId, info.response);
 
     return res.json({
       success: true,
