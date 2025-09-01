@@ -3,6 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/visuals/Navbar";
 import Footer from "@/components/visuals/Footer";
 import UserProvider from "./context/User/userContext";
+import { ApolloProvider } from "@apollo/client/react";
+import client from "@/lib/apolloClient";
+import Providers from "./provider";
 
 
 
@@ -24,8 +27,10 @@ export default function RootLayout({ children }) {
       <body
       >
         <UserProvider>
-          <Navbar />
-          {children}
+          <Providers>
+            <Navbar />
+            {children}
+          </Providers>
           <Footer />
         </UserProvider>
       </body>

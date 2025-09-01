@@ -8,6 +8,7 @@ import MyComponent from "@/components/visuals/TypeWriter";
 import Loader from "@/components/visuals/Loader";
 import Faq from "@/components/visuals/Faq";
 
+
 export default function FetchFood() {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);

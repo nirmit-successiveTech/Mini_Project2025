@@ -1,5 +1,6 @@
 export const typeDefs = `
   type Food {
+  id:ID!
     title:String!,
     description:String!, 
     imageUrl:String!,

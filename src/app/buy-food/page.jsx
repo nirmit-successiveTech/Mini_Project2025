@@ -25,13 +25,21 @@ export default function BuyFood() {
     fetchfood();
   }, []);
 
+   //for pagination
+  const pageLimit = 8;
+  const [currentPage,setCurrentPage]=useState(1);
+  const startIndex = (currentPage-1)*pageLimit
+  const pageSize = Math.ceil(food.length/pageLimit);
+  const foodArray = food.slice(startIndex,startIndex+pageLimit)
+
+
   if (loading) return <div className="text-center mt-6"><Loader /></div>; 
 
   return (
     <div>
       <div className="border-l-8 border-purple-700 pr-4 p-3 m-6 text-4xl font-bold"> Category</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-        {food.map((item,index) => (
+        {foodArray.map((item,index) => (
           <div key={index} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
               <img
@@ -109,6 +117,13 @@ export default function BuyFood() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex gap-2 items-center  justify-center">
+        {[...Array(pageSize)].map((_,index)=>{
+          return <div>
+            <button onClick={()=>setCurrentPage(index+1)} className="bg-purple-700 px-4 py-2 rounded-md text-white">{index+1}</button>
+          </div>
+        })}
       </div>
       <div>
         <InfiniteMovingCardsDemo />
