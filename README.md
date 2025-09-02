@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  HungerHub
 
-## Getting Started
+HungerHub is a community-driven platform that connects people, NGOs, and restaurants to reduce food waste and fight hunger. The platform enables users to donate surplus food, receive meals, and purchase food online, creating a hybrid solution that merges social good with modern food services.
 
-First, run the development server:
+##  Key Features
 
+### 1. Food Donation & Sharing
+- Users can donate extra food (home-cooked, restaurant leftovers, or packaged).
+- Others in need can browse and claim available food items.
+- Donation posts include title, description, image, and status (available/claimed).
+- Status updates in real time via GraphQL subscriptions or live updates.
+
+### 2. NGO-like Mail Service
+- Donors get customized email notifications (using Nodemailer).
+- Email confirmations for the requested food items.
+- Helps create a professional NGO-like experience.
+
+### 3. Online Food Ordering (Restaurant Integration)
+- Users can buy food online from partnered restaurants.
+- Secure payments powered by Stripe.
+- Supports multiple payment methods (cards, UPI, wallets).
+
+### 4. Core Features
+- Custom Mail to donor on requested food items.
+- Stripe payment to buy new food.
+- Real time notification on new food items being added.
+
+### 5. General Features
+- Pagination to limit data.
+- Toast notification.
+- Context to store maintain user session.
+- Jwt token to create user session.
+- Password hashing to encrypt data.
+- Cookies to create user session.
+
+
+##  Tech Stack
+
+**Frontend**: Next.js (App Router) + Tailwind CSS + Axios  
+**Backend**: Node.js + Express + MongoDB  
+**API**: GraphQL + REST (hybrid)  
+**Auth**: JWT-based authentication  
+**Payments**: Stripe API integration  
+**Emails**: Nodemailer for  emails  
+
+
+
+
+##  Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+- [Node.js](https://nodejs.org/en/) (v16 or later recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- A running [MongoDB](https://www.mongodb.com/) instance (local or on a cloud service like MongoDB Atlas)
+- [MongoDB Compass](https://www.mongodb.com/products/compass) (Recommended GUI for MongoDB)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/nirmit-successiveTech/Mini_Project2025.git
+   cd mini_project_2025
+   ```
+
+2. **Install Frontend Dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Install Backend Dependencies:**
+   ```bash
+    Already done in step 2.
+   ```
+
+###  Configuration (Environment Variables)
+
+This project requires environment variables to be set up.
+
+#### Backend (/frontend/.env)
+Create a .env file in the /frontend directory and add the following variables.
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+
+# Port for the backend server
+PORT=8000
+
+# Your MongoDB connection string
+MONGO_URI=mongodb://localhost:27017/hungerhub
+Note:
+Please replace the connection string with your local connection string.
+
+
+# Stripe secret key for payments
+STRIPE_SECRET_KEY=
+EMAIL_USER=
+EMAIL_PASS=
+NOTE:
+Above keys are kept empty as it is against github privacy policy.
+It could be send from another medium.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+###  Running the Application
 
-## Learn More
+#### Backend Server
+To start the backend server, navigate to the /frontend/src/backend directory and run:
+```bash
+npm run backend
+```
+The server will start on the port specified in your .env file (e.g., http://localhost:8000).
 
-To learn more about Next.js, take a look at the following resources:
+#### Frontend Development Server
+To start the frontend React application, navigate to the /frontend directory and run:
+```bash
+npm run dev
+```
+The application will open in your browser at http://localhost:3000.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
