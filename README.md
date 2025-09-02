@@ -94,12 +94,16 @@ Please replace the connection string with your local connection string.
 
 
 # Stripe secret key for payments
-STRIPE_SECRET_KEY=
-EMAIL_USER=
-EMAIL_PASS=
-NOTE:
-Above keys are kept empty as it is against github privacy policy.
-It could be send from another medium.
+PORT=8000;
+STRIPE_KEY=sk_test_51S0KDLHlUrORvkPrJH6BHOoRquVmWuF00UIahQ7qWRwJYmiKJ51L0HAFjnBBtpyqMIZMcIKgahNaQ4mo7Bb2mPtW00p6eIpdVe
+
+// Send grip keys for email
+SEND_GRIDS=
+SEND_GRID_USER=
+
+Note:
+The above secret key has not been included as it is against privacy policy.
+
 ```
 
 

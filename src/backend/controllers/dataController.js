@@ -55,7 +55,7 @@ export const sendMail = async (req, res, next) => {
     return res.json({
       success: true,
       status: 200,
-      message: "Mail sent",
+      message: "Mail sent to donor",
       data: { messageId: info.messageId },
     });
   } catch (error) {
