@@ -3,6 +3,7 @@ import { User } from "../models/userModel.js";
 import { Food } from "../models/foodModel.js";
 
 export const sendMail = async (req, res, next) => {
+  console.log("calling sendmail");
   try {
     const { email, user, status, foodId } = req.body;
 
@@ -37,7 +38,7 @@ export const sendMail = async (req, res, next) => {
       secure: false,
       auth: {
         user: process.env.SEND_GRID_USER,
-        pass: process.env.SEND_GRIDS,
+        pass:process.env.SEND_GRIDS,
       },
     });
 
@@ -49,6 +50,8 @@ export const sendMail = async (req, res, next) => {
       html: `<p>${text}</p>`,
     });
 
+    console.log(info)
+
     return res.json({
       success: true,
       status: 200,
@@ -56,6 +59,7 @@ export const sendMail = async (req, res, next) => {
       data: { messageId: info.messageId },
     });
   } catch (error) {
+    console.log("some error",error);
     return res.status(500).json({ error: error.message });
   }
 };
