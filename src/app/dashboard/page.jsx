@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Settings, LogOut, Home } from "lucide-react"; // icons
+import { User, Settings, LogOut, Home, UserStar } from "lucide-react"; // icons
 import { userAuth } from "../context/User/userContext";
 import Loader from "@/components/visuals/Loader";
 
@@ -53,17 +53,12 @@ export default function Dashboard() {
           >
             <Home size={18} /> Home
           </a>
+
           <a
-            href="#"
+            href="/admin"
             className="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition"
           >
-            <User size={18} /> Profile
-          </a>
-          <a
-            href="#"
-            className="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition"
-          >
-            <Settings size={18} /> Settings
+            <UserStar />Admin Panel
           </a>
           <button
             onClick={logout}

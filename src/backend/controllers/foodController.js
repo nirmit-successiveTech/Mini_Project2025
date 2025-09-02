@@ -50,3 +50,18 @@ export const getFoodById = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 }
+
+export const deleteFood = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Food.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({ error: "Food not found" });
+    }
+
+    res.status(200).json({ message: "Food deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete food" });
+  }
+};
